@@ -5,11 +5,11 @@ class Room {
 	private final String number;
 	private final int size;
 	private Map<String, Time> time;  // specify the free time for each day in a week
-	private Map<Time, Class> map;
+	private Map<String, Map<Time, Class>> classSchedule;  
 
 	public Room(String number, int size, int startTime, int endTime) {
 		this.number = number;
-		this.map = new HashMap<>();
+		this.classSchedule = new HashMap<>();
 		for (int i = 0; i < 5; i++) {
 			Time freeTime = new Time(startTime, endTime);
 			this.time.put(weekdays[i], freeTime);
@@ -57,6 +57,9 @@ class Room {
 			klass.setTime(temp);
 			klass.setMeetDate(i);  // each class only have one meeting time, but several meeting date, therefore only need to set one Time for each class but several dates for each class
 			time.get(weekdays[i]).setStart(newStartTime);
+			Map<Time, Class> newClass = new HashMap<>();
+			newClass.put(temp, klass);
+			classSchedule.put(weekdays[i], newClass);
 		} 
 		return true;
 	}
