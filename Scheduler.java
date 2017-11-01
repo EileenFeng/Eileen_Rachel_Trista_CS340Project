@@ -3,14 +3,15 @@ import java.io.*;
 
 public class Scheduler {
 	public static void main(String[] args) {
-		if(args.length < 3){
+		if(args.length < 2){
 			System.out.println("Invalid input");
 		} else {
 			Scheduler classScheduler = new Scheduler();
-			classScheduler.schedule(args[1], args[2]);
+			classScheduler.schedule(args[0], args[1]);
 		}
 	}
 
+	// read in input, process, and output
 	public void schedule(String inputFilePath, String constraintFilePath) {
 		// class of different level could be assigned at same time
 		// already have classes and rooms
@@ -30,6 +31,67 @@ public class Scheduler {
 		Time dayTime = readConstraints(constraintFilePath).getTime();
 		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime);
 
+		// create a new file called schedule.txt
+		/*
+		 *	Path file = Paths.get("schedule.txt");
+		 *	try {
+		 *
+		 *      if (file.createNewFile()){
+		 *        System.out.println("File is created!");
+		 *      }else{
+		 *        System.out.println("File already exists.");
+		 *      }
+		 *
+	     *	} catch (IOException e) {
+		 *      e.printStackTrace();
+		 *	}
+		 */
+
+		BufferedWriter writer = null;
+		try {
+		   	writer = new BufferedWriter(new OutputStreamWriter(
+		          new FileOutputStream("schedule.txt"), "utf-8"));
+		    writer.write("Course	Room	Teacher	Time	Students");
+		    writer.newLine();
+		    for(String building : buildings.keySet()){
+				List<Room> rs = rooms.get(building);
+				Set<String> ds = buildings.get(building);
+				int roomIndex = 0;
+				for (int level = 0; level <= 7; level++) {
+					for (String dept : ds) {
+						List<Class> cs = classes.get(dept);
+						int classIndex = 0;
+						Room r = rs.get(roomIndex);
+						while (classIndex < cs.size() && !r.isFull()) {
+							Class c = cs.get(classIndex);
+							if (c.getLevel() <= level && c.getTime() == null) {
+								r.addClass(c);
+								writer.write(c.getId());
+								writer.write('\t');
+								writer.write(r.getNumber());
+								writer.write('\t');
+								writer.write(c.getTeacher().getName());
+								writer.write('\t');
+								writer.write(c.getMeetDate());
+								writer.write(c.getTime().getStart());
+								writer.write(c.getTime().getEnd());
+								writer.write('\t');
+								writer.newLine();
+							}
+							classIndex++;
+						}
+						if (r.isFull() && roomIndex < rs.size() - 1) {
+							roomIndex++;
+						}
+					}
+				}
+			}
+		} catch (IOException ex) {
+		  	System.out.println("Create and write file failed");
+		} finally {
+		   try {writer.close();} catch (Exception ex) {/*ignore*/}
+		}
+	}
 
 		// when there's at least some time slot in a room left and there's at least a class that has not been scheduled
 		// when putting a class into a room, consider the following:
@@ -39,6 +101,7 @@ public class Scheduler {
 		// 4. 100 classes in the same building should not overlap 
 		// 5. classes of the same department should not overlap if they are not 100 level
 
+		/*
 		for(String building : buildings.keySet()){
 			List<Room> rs = rooms.get(building);
 			Set<String> ds = buildings.get(building);
@@ -60,7 +123,7 @@ public class Scheduler {
 					}
 				}
 			}
-
+			*/
 
 
 			// constraints:
@@ -73,8 +136,8 @@ public class Scheduler {
 			// 7. classes under the same department should be put in the same buildings (o)
 			// 8. time range 8:00am - 10:00pm (o)
 			// 9. time slots have different lengths
-		}
-	}
+		//}
+	//}
 
 	public int readInput(String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
 		int totalClasses = 0;
@@ -84,8 +147,12 @@ public class Scheduler {
 
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
+			System.out.println("here?");
 			while ((line = reader.readLine()) != null) {
 				String[] fields = line.split(delim);
+				for (int i = 0; i < fields.length; i++) {
+					System.out.println(" " + fields[i] + " ");
+				}
 				totalClasses += processLine(fields, classes, rooms, buildings, dayTime);
 			}
 		} catch (Exception e) {
@@ -126,6 +193,8 @@ public class Scheduler {
 			System.out.println("invalid class: " + id + ", discarded");
 			return 0;
 		}
+
+		System.out.println("id: " + id);
 
 		Class klass = new Class(id, cap, catalog, length, subject, new Teacher(teacherName));
 		if (!classes.containsKey(subject)) {

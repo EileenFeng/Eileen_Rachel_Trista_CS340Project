@@ -65,6 +65,17 @@ class Class {
 		meetDate[index] = true;
 	}
 
+	public String getMeetDate() {
+		if((meetDate[0] && meetDate[2]) && meetDate[4]) {
+			return "MTF";
+		} else if(meetDate[1] && meetDate[3]) {
+			return "TTH";
+		} else if(meetDate[4]) {
+			return "F";
+		}
+		return "";
+	}
+
 	/*
 	 *	@Override
 	 *	public int hashCode() {

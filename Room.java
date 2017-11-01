@@ -50,7 +50,7 @@ class Room {
 			}
 		}
 		// schedule the class
-		for (int i = 0; i < 5; i += 2) {
+		for (int i = 0; i < 5; i += interval) {
 			int oldStartTime = time.get(weekdays[i]).getStart();
 			int newStartTime = oldStartTime + len;
 			Time temp = new Time(oldStartTime, newStartTime);
@@ -71,5 +71,9 @@ class Room {
 			}
 		}
 		return true;
+	}
+
+	public Map<String, Map<Time, Class>> getSchedule() {
+		return classSchedule;
 	}
 }
