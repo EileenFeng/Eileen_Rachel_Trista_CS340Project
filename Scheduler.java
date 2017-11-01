@@ -3,10 +3,15 @@ import java.io.*;
 
 public class Scheduler {
 	public static void main(String[] args) {
-		
+		if(args.length < 3){
+			System.out.println("Invalid input");
+		} else {
+			Scheduler classScheduler = new Scheduler();
+			classScheduler.schedule(args[1], args[2]);
+		}
 	}
 
-	public void schedule() {
+	public void schedule(String inputFilePath, String constraintFilePath) {
 		// class of different level could be assigned at same time
 		// already have classes and rooms
 		int numScheduled = 0;
@@ -20,10 +25,10 @@ public class Scheduler {
 		//*** finish one department before moving to the other 
 
 		// read input, initialize and store each class object
-		String filePath = "";
-		String fileConstraint = "";
-		Time dayTime = readConstraints(fileConstraint).getTime();
-		int numClasses = readInput(filePath, classes, rooms, buildings, dayTime);
+		//String filePath = inputData;
+		//String fileConstraint = inputConstraints;
+		Time dayTime = readConstraints(constraintFilePath).getTime();
+		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime);
 
 
 		// when there's at least some time slot in a room left and there's at least a class that has not been scheduled
