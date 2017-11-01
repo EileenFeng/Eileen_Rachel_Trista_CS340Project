@@ -25,12 +25,6 @@ class Room {
 		return size;
 	}
 
-	// public void addClass(Class klass) {
-	// 	if (size <= klass.getCap()) {
-	// 		map.
-	// 	}
-	// }
-
 // add time based on the start and end minutes of a class
 // for each room, add class from the beginning (0 min) to the last minutes in order
 	public boolean addClass(Class klass) {
@@ -44,15 +38,12 @@ class Room {
 		} else if(len > 90) { // otherwise meet once, F
 			days = 1;
 		}
-
-		// the number of days between meeting times each week
-		int interval = 5 - days;  
-
+		int interval = 5 - days;  // the number of days between meeting times each week
 		// check if have time or conflict teacher
 		// check teacher, the addTime function for teacher needs change: need to check for specific dates!
 		for (int i = 0; i < 5; i += interval) {
 		    Time temp = new Time(time.get(weekdays[i]).getStart(), time.get(weekdays[i]).getStart() + len);
-			if(!teacher.addTime(temp)){
+			if(!teacher.addTime(weekdays[i], temp)){
 				return false;
 			}else if (len > time.get(weekdays[i]).getInterval()){
 				return false;
