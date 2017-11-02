@@ -44,6 +44,38 @@ class StudentPref {
 		}
 	}
 
+	public void writePref() {
+		BufferedWriter writer = null;
+		try {
+	   	writer = new BufferedWriter(new OutputStreamWriter(
+	          new FileOutputStream("student_prefs.txt"), "utf-8"));
+	    writer.write("Students");
+	    writer.write('\t');
+	    writer.write('\t');
+	    writer.write(Integer.toString(NUM_STUDENTS));
+	    writer.newLine();
+	    for (Integer studentId : prefs.keySet()) {
+	    	writer.write(Integer.toString(studentId));
+	    	List<Integer> prefList = prefs.get(studentId);
+	    	writer.write('\t');
+	    	int index = 0;
+	    	while(index < prefList.size()) {
+	    		writer.write(Integer.toString(prefList.get(index)) + " ");
+	    		index ++;
+	    	}
+	    	writer.newLine();
+	    } 
+	  } catch (IOException ex) {
+	    	System.out.println("Can't write!!!!!!!!!!!!!!!!!!");
+	    } finally {
+	    	try {
+	    		writer.close();
+	    	} catch (Exception ex) {
+	    		System.out.println("Failed to close writer");
+	    	}
+	    }
+	}
+
 	public void generatePrefs(Map<String, List<Class>> classes) {
 		Set<Integer> ids = new HashSet<>();
 		List<Integer> idList = new ArrayList<>();

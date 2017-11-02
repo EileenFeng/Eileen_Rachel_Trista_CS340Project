@@ -23,6 +23,10 @@ public class Scheduler {
 		//Map<String, Teacher> teachers = new HashMap<>();  //key: teacher name, value: Teacher object
 		Time dayTime = readConstraints(constraintFilePath).getTime();
 		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime, sp);
+		sp.writePref();
+		System.out.println("===================================================================");
+		sp.readPref("student_prefs.txt");
+		sp.invertPrefs();
 
 		BufferedWriter writer = null;
 		try {
@@ -151,7 +155,6 @@ public class Scheduler {
 		}
 
 		sp.generatePrefs(classes);
-		sp.invertPrefs();
 
 		return totalClasses;
 	}
