@@ -27,7 +27,7 @@ public class Scheduler {
 		try {
 		   	writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream("schedule.txt"), "utf-8"));
-		    writer.write("Course	Room	Teacher	Time	Students");
+		    writer.write("Course	Room	Teacher				Time		Students");
 		    writer.newLine();
 		    for(String building : buildings.keySet()){
 					List<Room> rs = rooms.get(building);
@@ -44,21 +44,31 @@ public class Scheduler {
 									if(r.addClass(c)) {
 										writer.write(Integer.toString(c.getId()));
 										writer.write('\t');
-										System.out.println(r.getNumber());
-										writer.write(r.getNumber());
+										writer.write(building+" "+r.getNumber());
 										writer.write('\t');
 										writer.write(c.getTeacher().getName());
 										writer.write('\t');
-										writer.write(c.getMeetDate());
-										writer.write(Integer.toString(c.getTime().getStart()));
-										writer.write(Integer.toString(c.getTime().getEnd()));
+										writer.write(c.getMeetDate()+" ");
+										String start = "", end = "";
+										if (c.getTime().getStart()%60 == 0) {
+											start = Integer.toString(c.getTime().getStart()/60) + ":" + Integer.toString(c.getTime().getStart()%60) + "0";
+										} else {
+											start = Integer.toString(c.getTime().getStart()/60) + ":" + Integer.toString(c.getTime().getStart()%60);
+										}
+										if (c.getTime().getEnd()%60 == 0) {
+											end = Integer.toString(c.getTime().getEnd()/60) + ":" + Integer.toString(c.getTime().getEnd()%60) + "0";
+										} else {
+											end = Integer.toString(c.getTime().getEnd()/60) + ":" + Integer.toString(c.getTime().getEnd()%60);
+										}
+										writer.write(start+" ");
+										writer.write(end);
 										writer.write('\t');
 										writer.newLine();
 									}
 								}
 								classIndex++;
 							}
-							if (r.isFull() && roomIndex < rs.size() - 1) {
+							if (roomIndex < rs.size() - 1) {
 								roomIndex++;
 							}
 						}
