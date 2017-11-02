@@ -63,7 +63,8 @@ public class Scheduler {
 										}
 										writer.write(start+" ");
 										writer.write(end);
-										writer.write('\t'+'\t');
+										writer.write('\t');
+										writer.write('\t');
 										List<Integer> stdPre = sp.getStdList(c.getId());
 										if(stdPre != null) {
 											int stdNum = 0;

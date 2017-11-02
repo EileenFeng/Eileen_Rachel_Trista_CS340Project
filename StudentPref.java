@@ -3,7 +3,7 @@ import java.io.*;
 
 class StudentPref {
 	private final int NUM_PREFS = 4;
-	private final int NUM_STUDENTS = 1000;
+	private final int NUM_STUDENTS = 2000;
 	private Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
 	private Map<Integer, List<Integer>> invertedPrefs; // key: class id, value: student ids
 
