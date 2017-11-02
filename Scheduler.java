@@ -24,7 +24,6 @@ public class Scheduler {
 		Time dayTime = readConstraints(constraintFilePath).getTime();
 		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime, sp);
 		sp.writePref();
-		System.out.println("===================================================================");
 		sp.readPref("student_prefs.txt");
 		sp.invertPrefs();
 
