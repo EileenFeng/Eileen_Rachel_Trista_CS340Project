@@ -48,7 +48,11 @@ public class Scheduler {
 									if(r.addClass(c)) {
 										writer.write(Integer.toString(c.getId()));
 										writer.write('\t');
-										writer.write(building+" "+r.getNumber());
+										if(r.getNumber().equals("")) {
+											writer.write("-1");
+										} else {
+											writer.write(building+" "+r.getNumber());
+										}
 										writer.write('\t');
 										writer.write(c.getTeacher().getName());
 										writer.write('\t');
@@ -66,7 +70,6 @@ public class Scheduler {
 										}
 										writer.write(start+" ");
 										writer.write(end);
-										writer.write('\t');
 										writer.write('\t');
 										List<Integer> stdPre = sp.getStdList(c.getId());
 										if(stdPre != null) {
