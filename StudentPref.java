@@ -73,7 +73,7 @@ class StudentPref {
 		}
 	}
 
-	public void invertPref() {
+	public void invertPrefs() {
 		for (Integer student : prefs) {
 			List<Integer> classIds = prefs.get(student);
 			for (Integer classId : classIds) {

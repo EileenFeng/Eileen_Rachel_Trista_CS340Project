@@ -136,7 +136,7 @@ public class Scheduler {
 		}
 
 		sp.generatePrefs(classes);
-		sp.invertPref();
+		sp.invertPrefs();
 
 		return totalClasses;
 	}
