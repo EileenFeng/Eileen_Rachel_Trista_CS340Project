@@ -5,9 +5,11 @@ class StudentPref {
 	private final int NUM_PREFS = 4;
 	private final int NUM_STUDENTS = 100;
 	private Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
+	private Map<Integer, List<Integer>> invertedPrefs; // key: class id, value: student ids
 
 	public StudentPref() {
 		prefs = new HashMap<>();
+		invertedPrefs = new HashMap<>();
 	}
 
 	public Map<Integer, List<Integer>> getPrefs() {
@@ -60,5 +62,26 @@ class StudentPref {
 			}
 		}
 
+	}
+
+	public void removeClass(int id, Class klass) {
+		List<Class> pref = prefs.get(id);
+		for (Class k : pref) {
+			if (klass.equals(k)) {
+				pref.remove(k);
+			}
+		}
+	}
+
+	public void invertPref() {
+		for (Integer student : prefs) {
+			List<Integer> classIds = prefs.get(student);
+			for (Integer classId : classIds) {
+				if (!invertedPrefs.containsKey(classId)) {
+					invertedPrefs.put(classId, new ArrayList<>());
+				}
+				invertedPrefs.get(classId).add(student);
+			}
+		}
 	}
 }

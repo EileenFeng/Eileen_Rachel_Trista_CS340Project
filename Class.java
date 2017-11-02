@@ -75,20 +75,20 @@ class Class {
 		return "";
 	}
 
-	/*
-	 *	@Override
-	 *	public int hashCode() {
-	 *		return id;
-	 *	}
-	 *
-	 *	@Override
-	 *	public boolean equals(Object o) {
-	 *		if (o == this) return true;
-	 *      	if (!(o instanceof Class)) {
-	 *        	return false;
-	 *     	}
-	 *		Class that = (Class)obj;
-	 *		return this.id == that.id;
-	 *	}
-	 */
+	
+ 	@Override
+ 	public int hashCode() {
+ 		return id;
+ 	}
+ 
+ 	@Override
+ 	public boolean equals(Object o) {
+ 		if (o == this) return true;
+       	if (!(o instanceof Class)) {
+         	return false;
+      	}
+ 		Class that = (Class)obj;
+ 		return this.id == that.id;
+ 	}
+	 
 }
