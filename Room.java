@@ -30,20 +30,22 @@ class Room {
 // for each room, add class from the beginning (0 min) to the last minutes in order
 	public boolean addClass(Class klass) {
 		int len = klass.getLength();
-		System.out.println("class length is: " + len);
 		Teacher teacher = klass.getTeacher();
-		int days = 0;
+		int startDay = 0; // the day where class starts
+		int interval = 0; // days between two meeting times
 		if(len <= 60){ // if length of class smaller than 60, MWF
-			days = 3;
+			startDay = 0;
+			interval = 2;
 		} else if(len > 60 && len <= 90) { // between 60 - 90, meet twice TTH
-			days = 2;
+			startDay = 1;
+			interval = 2;
 		} else if(len > 90) { // otherwise meet once, F
-			days = 1;
+			startDay = 4;
+			interval = 3;
 		}
-		int interval = 5 - days;  // the number of days between meeting times each week
 		// check if have time or conflict teacher
 		// check teacher, the addTime function for teacher needs change: need to check for specific dates!
-		for (int i = 0; i < 5; i += interval) {
+		for (int i = startDay; i < 5; i += interval) {
 		    Time temp = new Time(time.get(weekdays[i]).getStart(), time.get(weekdays[i]).getStart() + len);
 		   	if(!teacher.addTime(weekdays[i], temp)){
 					return false;
@@ -53,7 +55,7 @@ class Room {
 		}
 		// schedule the class
 
-		for (int i = 0; i < 5; i += interval) {
+		for (int i = startDay; i < 5; i += interval) {
 			int oldStartTime = time.get(weekdays[i]).getStart();
 			int newStartTime = oldStartTime + len;
 			Time temp = new Time(oldStartTime, newStartTime);
