@@ -31,7 +31,7 @@ public class Scheduler {
 		try {
 		   	writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream("schedule.txt"), "utf-8"));
-		    writer.write("Course	Room	Teacher				Time		Students");
+		    writer.write("Course"+'\t'+"Room"+'\t'+"Teacher"+'\t'+"Time"+'\t'+"Students");
 		    writer.newLine();
 		    for(String building : buildings.keySet()){
 					List<Room> rs = rooms.get(building);
