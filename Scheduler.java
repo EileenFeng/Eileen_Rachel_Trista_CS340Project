@@ -19,33 +19,9 @@ public class Scheduler {
 		Map<String, List<Class>> classes = new HashMap<>(); // key: department, value: list of classes under the department, order by decreasing cap
 		Map<String, List<Room>> rooms = new HashMap<>(); // key: building, value: list of rooms, sort by decreasing order of size
 		Map<String, Set<String>> buildings = new HashMap<>(); // key: building, value: list of departments
-
-		//for building A: departments a,b,c
-		//for a -> classes, ordered by cap
-		//assign room with classes (large cap -> small cap) *** finish one room before moving to the next 
-		//*** finish one department before moving to the other 
-
-		// read input, initialize and store each class object
-		//String filePath = inputData;
-		//String fileConstraint = inputConstraints;
+		//Map<String, Teacher> teachers = new HashMap<>();  //key: teacher name, value: Teacher object
 		Time dayTime = readConstraints(constraintFilePath).getTime();
 		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime);
-
-		// create a new file called schedule.txt
-		/*
-		 *	Path file = Paths.get("schedule.txt");
-		 *	try {
-		 *
-		 *      if (file.createNewFile()){
-		 *        System.out.println("File is created!");
-		 *      }else{
-		 *        System.out.println("File already exists.");
-		 *      }
-		 *
-	     *	} catch (IOException e) {
-		 *      e.printStackTrace();
-		 *	}
-		 */
 
 		BufferedWriter writer = null;
 		try {
@@ -54,37 +30,39 @@ public class Scheduler {
 		    writer.write("Course	Room	Teacher	Time	Students");
 		    writer.newLine();
 		    for(String building : buildings.keySet()){
-				List<Room> rs = rooms.get(building);
-				Set<String> ds = buildings.get(building);
-				int roomIndex = 0;
-				for (int level = 0; level <= 7; level++) {
-					for (String dept : ds) {
-						List<Class> cs = classes.get(dept);
-						int classIndex = 0;
-						Room r = rs.get(roomIndex);
-						while (classIndex < cs.size() && !r.isFull()) {
-							Class c = cs.get(classIndex);
-							if (c.getLevel() <= level && c.getTime() == null) {
-								r.addClass(c);
-								writer.write(c.getId());
-								writer.write('\t');
-								writer.write(r.getNumber());
-								writer.write('\t');
-								writer.write(c.getTeacher().getName());
-								writer.write('\t');
-								writer.write(c.getMeetDate());
-								writer.write(c.getTime().getStart());
-								writer.write(c.getTime().getEnd());
-								writer.write('\t');
-								writer.newLine();
+					List<Room> rs = rooms.get(building);
+					Set<String> ds = buildings.get(building);
+					int roomIndex = 0;
+					for (int level = 0; level <= 7; level++) {
+						for (String dept : ds) {
+							List<Class> cs = classes.get(dept);
+							int classIndex = 0;
+							Room r = rs.get(roomIndex);
+							while (classIndex < cs.size() && !r.isFull()) {
+								Class c = cs.get(classIndex);
+								if (c.getLevel() <= level && c.getTime() == null) {
+									if(r.addClass(c)) {
+										writer.write(Integer.toString(c.getId()));
+										writer.write('\t');
+										System.out.println(r.getNumber());
+										writer.write(r.getNumber());
+										writer.write('\t');
+										writer.write(c.getTeacher().getName());
+										writer.write('\t');
+										writer.write(c.getMeetDate());
+										writer.write(Integer.toString(c.getTime().getStart()));
+										writer.write(Integer.toString(c.getTime().getEnd()));
+										writer.write('\t');
+										writer.newLine();
+									}
+								}
+								classIndex++;
 							}
-							classIndex++;
-						}
-						if (r.isFull() && roomIndex < rs.size() - 1) {
-							roomIndex++;
+							if (r.isFull() && roomIndex < rs.size() - 1) {
+								roomIndex++;
+							}
 						}
 					}
-				}
 			}
 		} catch (IOException ex) {
 		  	System.out.println("Create and write file failed");
@@ -98,33 +76,8 @@ public class Scheduler {
 		// 1. No two classes should be put into the same time slot in the same room
 		// 2. No two classes should be put into the same time slot if they are taught by the same teacher
 		// 3. Try not putting a class into a room when the room size is less than class cap
-		// 4. 100 classes in the same building should not overlap 
+		// 4. 100 classes in the same building should not overlap
 		// 5. classes of the same department should not overlap if they are not 100 level
-
-		/*
-		for(String building : buildings.keySet()){
-			List<Room> rs = rooms.get(building);
-			Set<String> ds = buildings.get(building);
-			int roomIndex = 0;
-			for (int level = 0; level <= 7; level++) {
-				for (String dept : ds) {
-					List<Class> cs = classes.get(dept);
-					int classIndex = 0;
-					Room r = rs.get(roomIndex);
-					while (classIndex < cs.size() && !r.isFull()) {
-						Class c = cs.get(classIndex);
-						if (c.getLevel() <= level && c.getTime() == null) {
-							r.addClass(c);
-						}
-						classIndex++;
-					}
-					if (r.isFull() && roomIndex < rs.size() - 1) {
-						roomIndex++;
-					}
-				}
-			}
-			*/
-
 
 			// constraints:
 			// 1. class cap (o)
@@ -147,12 +100,8 @@ public class Scheduler {
 
 		try {
 			reader = new BufferedReader(new FileReader(filePath));
-			System.out.println("here?");
 			while ((line = reader.readLine()) != null) {
 				String[] fields = line.split(delim);
-				for (int i = 0; i < fields.length; i++) {
-					System.out.println(" " + fields[i] + " ");
-				}
 				totalClasses += processLine(fields, classes, rooms, buildings, dayTime);
 			}
 		} catch (Exception e) {
@@ -183,31 +132,38 @@ public class Scheduler {
 			return 0;
 		}
 		int id = Integer.parseInt(fields[0]);
-		int cap = Integer.parseInt(fields[11]);
-		int roomCap = Integer.parseInt(fields[24]);
-		String subject = fields[1], catalog = fields[2], teacherName = fields[6];
-		String building = fields[20], room = fields[21];
-		String startTime = fields[18], endTime = fields[19];
+		int cap = Integer.parseInt(fields[fields.length - 14]);
+		int roomCap = Integer.parseInt(fields[fields.length - 1]);
+		String subject = fields[1], catalog = fields[2], teacherName = fields[6] + ", " + fields[7];
+		String building = fields[fields.length - 5], room = fields[fields.length - 4];
+		String startTime = fields[fields.length - 7], endTime = fields[fields.length - 6];
 		int length = convertTimeToMinute(endTime) - convertTimeToMinute(startTime) + 10;
 		if (cap == 0 || length == 0) {
-			System.out.println("invalid class: " + id + ", discarded");
+			//System.out.println("invalid class: " + id + ", discarded");
 			return 0;
 		}
-
-		System.out.println("id: " + id);
 
 		Class klass = new Class(id, cap, catalog, length, subject, new Teacher(teacherName));
 		if (!classes.containsKey(subject)) {
 			classes.put(subject, new ArrayList<>());
 		}
+		klass.getTeacher().classes().add(klass);
 		classes.get(subject).add(klass);
+
+		// if(! teachers.containsKey(teacherName)) {
+		// 	Teacher teacher = new Teacher(teacherName);
+		// 	teacher.classes().add(klass)
+		// 	teachers.put(teacherName, teacher);
+		// }else{
+		// 	Teacher temp = teachers.get(teacherName);
+		// 	temp.classes().add(klass);
+		// }
 
 		if (!rooms.containsKey(building)) {
 			rooms.put(building, new ArrayList<>());
 		}
-		int totalTime = 840; // TODO: initialize somewhere else
+
 		if (!rooms.get(building).contains(room)) {
-			// here
 			rooms.get(building).add(new Room(room, roomCap, dayTime.getStart(), dayTime.getEnd()));
 		}
 
@@ -215,18 +171,20 @@ public class Scheduler {
 			buildings.put(building, new HashSet<>());
 		}
 		if (!buildings.get(building).contains(subject)) {
-			buildings.get(buildings).add(subject);
+			buildings.get(building).add(subject);
 		}
 
 		return 1;
 	}
 
 	public int convertTimeToMinute(String time) {
-		String[] pieces = time.split("\\s+|:");
-		if (pieces.length < 3) return 0;
-		int hour = Integer.parseInt(pieces[0]) % 12;
-		int minute = Integer.parseInt(pieces[1]);
-		if (pieces[2].equalsIgnoreCase("PM")) {
+		String[] hours = time.split(":");
+		if (hours.length < 2) return 0;
+		String[] minutes = hours[1].split("\\s+");
+		String[] hourNum = hours[0].split("\\s+");
+		int hour = Integer.parseInt(hourNum[hourNum.length-1]) % 12;
+		int minute = Integer.parseInt(minutes[0]);
+		if (minutes[1].equalsIgnoreCase("PM")) {
 			hour += 12;
 		}
 		return hour * 60 + minute;
@@ -241,10 +199,10 @@ public class Scheduler {
 			reader = new BufferedReader(new FileReader(filePath));
 			line = reader.readLine();
 			String[] pieces = line.split(" ");
-			startTime = pieces[2] + pieces[3];
+			startTime = pieces[2] + " " + pieces[3];
 			line = reader.readLine();
 			pieces = line.split(" ");
-			endTime = pieces[2] + pieces[3];
+			endTime = pieces[2] + " " + pieces[3];
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -254,7 +212,6 @@ public class Scheduler {
 				e.printStackTrace();
 			}
 		}
-
 		return new Constraints(new Time(convertTimeToMinute(startTime), convertTimeToMinute(endTime)));
 	}
 }

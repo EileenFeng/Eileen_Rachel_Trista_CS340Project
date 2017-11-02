@@ -1,0 +1,321 @@
+Course	Room	Teacher	Time	Students
+1827		"Karagiaridi, Olga"	MTF480540	
+1828		"Miller, Bradley Robert"	MTF540600	
+1826		"White, Susan A."	MTF600660	
+2369		"Watkins, Lisa Marie"	MTF660720	
+2370		"Watkins, Lisa Marie"	MTF720780	
+2371		"Watkins, Lisa Marie"	MTF780840	
+2372		"Watkins, Lisa Marie"	MTF840900	
+2373		"Watkins, Lisa Marie"	MTF900910	
+2187		"Blank, Douglas"	480570	
+2199		"Eisenberg, Richard Alan"	570660	
+2457		"Eisenberg, Richard Alan"	MTF910920	
+2188		, 	MTF920980	
+2189		, 	MTF9801040	
+2200		"Eisenberg, Richard Alan"	MTF10401100	
+1772		"Myers, Amy N."	MTF480540	
+1967		"Sudparid, Daisy"	480570	
+1771		"Smiley, Danielle Elizabeth"	MTF540600	
+1773		"Myers, Amy N."	MTF600660	
+1774		"Kasius, Peter G."	MTF660720	
+1775		"Kasius, Peter G."	570660	
+2375		"Malachowski, William P"	MTF720780	
+2376		"Benner, Britt VanKirk"	F780990	
+1761		"Kung, Yan"	660750	
+2382		"Karagiaridi, Olga"	MTF9901000	
+1801		"Eisenberg, Richard Alan"	480570	
+1783		"Blank, Douglas"	570660	
+1889		"Kumar, Deepak"	660750	
+2201		"Eisenberg, Richard Alan"	MTF480540	
+1944		"Donnay, Victor J."	MTF540600	
+1945		"Kasius, Peter G."	MTF600660	
+2239		"Cheng, Leslie C."	750840	
+2778		"Cheng, Leslie C."	840930	
+2130		"Graham, Erica Janine"	9301020	
+1737		"Kung, Yan"	10201110	
+1872		"Kumar, Deepak"	480570	
+1745		"Xu, Yilun"	570660	
+1947		"Milicevic, Djordje"	660750	
+1731		"Cheng, Leslie C."	750840	
+1732		"Melvin, Paul"	840930	
+1968		"Milicevic, Djordje"	9301020	
+1969		"Donnay, Victor J."	10201110	
+2651		"Cheng, Leslie C."	11101200	
+2000		"Graham, Erica Janine"	12001290	
+2377		"Karagiaridi, Olga"	F480690	
+2378		"Benner, Britt VanKirk"	F690900	
+2379		"Benner, Britt VanKirk"	F9001110	
+1962		"Francl-Donnay, Michelle Miller"	480570	
+1741		"Malachowski, William P"	570660	
+2600	LEC	"Callaghan, Jennefer"	480570	
+2601	LEC	"Salkever, Stephen G."	570660	
+2602	LEC	"Hemmeter, Gail C."	660750	
+2603	LEC	"Thomas, Kate Louise"	750840	
+2604	LEC	"Goldsmith, Jonas I."	840930	
+2605	LEC	"Brodfuehrer, Peter D."	9301020	
+2606	LEC	"Stanford, Eleanor Mae"	10201110	
+2607	LEC	"Stanford, Eleanor Mae"	11101200	
+2608	LEC	 Affluence,  and American Culture"	12001290	
+2030	LEC	"Pinto-Coelho, Joanna Marie"	480570	
+2564	LEC	"Kale, Madhavi"	570660	
+1884	LEC	"Fenner, Sofia Alia"	660750	
+1892	LEC	"Allen, Michael H."	750840	
+2609	LEC	 Affluence,  and American Culture"	840930	
+2610	LEC	"Sullivan, Mecca Jamilah"	9301020	
+2611	LEC	"Griffith, Joann Denise"	10201110	
+2612	LEC	"Griffith, Joann Denise"	11101200	
+2613	LEC	"Bryant, Sara Louise"	12001290	
+1987	LEC	"Taylor, Jamie K."	480570	
+2148	LEC	"Kopec, Stephen Dennis"	570660	
+2588	LEC	"Kopec, Stephen Dennis"	660750	
+2589	LEC	"Litsinger, Betty Lou"	750840	
+2592	LEC	"Litsinger, Betty Lou"	840930	
+2678	LEC	"Joyce, Colette M."	9301020	
+2032	LEC	"Wright, Nathan Daniel"	10201110	
+1932	LEC	"Montes, Veronica"	11101200	
+1971	LEC	"Wright, Nathan Daniel"	12001290	
+2427	LEC	"Ullman, Sharon R."	480570	
+1820	LEC	"Gallup-Diaz, Ignacio"	570660	
+1963	LEC	 & Ntrl Hist", 	660750	
+2121	LEC	"Kurimay, Andrea Anita"	750840	
+1907	LEC	"Ashraf, Assef"	840930	
+2704	LEC	"Snell, Steven L."	9301020	
+1836	LEC	"Hager, Carol"	10201110	
+1960	LEC	"Elkins, Jeremy"	11101200	
+2706	LEC	, "Walter	12001290	
+2614	LEC	"Gordon, Colby William"	480570	
+2615	LEC	"Walker, Alicia"	570660	
+2616	LEC	 Subvert,  Entertain:The Role/Humor"	660750	
+2617	LEC	"Matthews, Airea Dionne"	750840	
+2618	LEC	 Bad Science and Nonsense", "Matlin	840930	
+2619	LEC	"Walters, Jennifer L."	9301020	
+2620	LEC	 Brain and Culture: Good,  Bad & Ugly"	10201110	
+2621	LEC	"Jiang, Yonglin"	11101200	
+2622	LEC	"Tratner, Michael"	12001290	
+1791	I	"Liontas, Anna"	F480660	
+1965	I	"Feldman, Lauren M"	F660840	
+2027	I	"Torday, Daniel P."	480570	
+2146	I	"Matthews, Airea Dionne"	570660	
+1890	I	"Bryant, Sara Louise"	660750	
+1940	I	"Tratner, Michael"	750840	
+2120	I	"Beard, Linda-Susan"	840930	
+2028	I	"Pinto-Coelho, Joanna Marie"	480570	
+2031	I	"Karen, David"	570660	
+2116	I	"Coutinho-Sledge, Piper Elizabeth"	660750	
+2029	I	"Washington, Robert"	750840	
+1769	I	"Coutinho-Sledge, Piper Elizabeth"	F480600	
+1941	I	"Karen, David"	F600780	
+2001	I	"Washington, Robert"	F780960	
+2122	I	"Ngalamulume, Kalala"	F480660	
+2123	I	"Ullman, Sharon R."	F660840	
+2132	I	"Kurimay, Andrea Anita"	F8401020	
+2021	I	"Kurimay, Andrea Anita"	F10201200	
+1869	I	"Allen, Michael H."	F12001320	
+2623	I	"Coutinho-Sledge, Piper Elizabeth"	480570	
+2624	I	"Myers, Amy N."	570660	
+2625	I	 Rebellion,  Revolution"	660750	
+2626	I	 Please", "Lord	750840	
+2627	I	"Spohrer, Jennifer L."	840930	
+2682	I	"Schneider, Bethany"	9301020	
+2147	I	"Torday, Daniel P."	F480660	
+2143	I	"Thomas, Kate Louise"	10201110	
+2115	I	"Golden, Marissa Martino"	F480660	
+2410	I	"Elkins, Jeremy"	F660840	
+2180	I	"Fenner, Sofia Alia"	F8401020	
+1777	I	"Oh, Seung-Youn"	F10201200	
+2135	I	"Schlosser, Joel Alden"	480570	
+1617	I	"Sullivan, Mecca Jamilah"	480570	
+1776	I	"Taylor, Jamie K."	570660	
+1918	I	"Gordon, Colby William"	660750	
+1934	I	"Schneider, Bethany"	750840	
+1931	I	"Taylor, Jamie K."	840930	
+1814	21	"Kubati, Roni"	MTF480540	
+1815	21	"Kubati, Roni"	MTF540600	
+2672	21	"Horner, Betsy Helen"	MTF600660	
+2673	21	"Horner, Betsy Helen"	480570	
+2674	21	"Horner, Betsy Helen"	MTF660720	
+1860	21	"Ricci, Roberta"	570660	
+2183	21	"Sudparid, Daisy"	MTF720780	
+2145	21	"Donohue, Alice A."	MTF780840	
+1823	21	"Lindenlauf, Astrid"	MTF840900	
+2436	21	"Lindenlauf, Astrid"	MTF900960	
+2437	21	"Lindenlauf, Astrid"	MTF9601020	
+1917	21	"Rescorla, Leslie"	660750	
+1780	21	"Cast, David J.D."	MTF480540	
+1902	21	"Ceglowski, Janet"	480570	
+1903	21	"Sfekas, Andrew Edward"	570660	
+1904	21	"Sfekas, Andrew Edward"	660750	
+2110	21	"Lindenlauf, Astrid"	750840	
+1839	21	"Donohue, Alice A."	MTF540600	
+1799	21	"Albert, William Dustin"	840930	
+1792	21	"Park, Heejung"	9301020	
+1973	21	"Thapar, Anjali"	10201110	
+2761	21	"Lee, Jeong Min"	11101200	
+1946	21	"Feliz, Matthew C."	F480670	
+2454	21	"Shi, Jie"	480570	
+1804	21	"Ross, David R."	570660	
+1862	21	"Nutting, Andrew Willis"	660750	
+2108	21	"Sfekas, Andrew Edward"	750840	
+1805	21	"Rock, Michael T."	840930	
+2033	21	"Flaks, Debbie"	F670850	
+1806	21	"Cassidy, Kimberly E."	480570	
+1734	21	"Schulz, Marc S."	570660	
+1943	21	"Rescorla, Leslie"	F480660	
+2721	21	"Lee, Jeong Min"	660750	
+1781	21	"Schulz, Marc S."	750840	
+1921	21	"Thapar, Anjali"	840930	
+1922	21	"Park, Heejung"	9301020	
+1786	21	"Robbins, Carrie Marie"	F660780	
+1974	21	"Cheng, Leslie C."	MTF480490	
+1976	21	"Graham, Erica Janine"	MTF490500	
+1797	21	"Rock, Michael T."	480570	
+1850	21	"Ross, David R."	570660	
+1970	21	"Rock, Michael T."	F500620	
+1803	21	"Nutting, Andrew Willis"	660750	
+1868	21	"Ceglowski, Janet"	750840	
+2275	21	"Wilson, Chanelle Elizabeth"	F620780	
+1785	21	"Weldon, Marianne Carole"	F780960	
+1733	25	"Albert, William Dustin"	F480660	
+2125	25	"Saltzman, Lisa R."	F660780	
+2448	25	"Shi, Jie"	F780900	
+2129	25	"Houghteling, Sylvia Waisbren"	F9001020	
+1754	224	"Bishop, Stephen Lawrence"	MTF480540	
+1755	224	"Bishop, Stephen Lawrence"	MTF540600	
+1756	224	"Arribas, Ines Monique"	MTF600660	
+1757	224	"Berard, Kaylea Blaise"	MTF660720	
+1758	224	"Berard, Kaylea Blaise"	MTF720780	
+1759	224	"Berard, Kaylea Blaise"	MTF780840	
+1747	224	"Song, H. Rosi"	480570	
+1864	224	"Arribas, Ines Monique"	MTF840900	
+1865	224	"Arribas, Ines Monique"	MTF900960	
+1866	224	"Quintero, Maria C."	MTF9601020	
+1880	224	"Sacerio-Gari, Enrique"	570660	
+1821	224	"Conybeare, Catherine"	660750	
+1992	224	"Rice, Collin Christopher"	480570	
+1933	224	"Prettyman, Adrienne"	570660	
+1870	224	"Edmonds, Radcliffe"	660750	
+1746	224	"Roses, Shiamin Kwa"	F480600	
+1961	224	"Rice, Collin Christopher"	750840	
+2017	224	"Prettyman, Adrienne"	F600730	
+1885		"D'Angelo, Denise S"	MTF480540	
+1886		"Cantor, Madeline R."	MTF540600	
+1793		"Brick, David Dean"	480570	
+1887		"D'Angelo, Denise S"	MTF600660	
+1753		"Mintzer, Linda K."	570660	
+1800		"Jones, Lela Aisha"	660750	
+1939		"Stortz, Michelle Winifred"	750840	
+2271		"Goodman, Yasmin"	840930	
+1752		"D'Angelo, Denise S"	F660780	
+1938		"Malcolm-Naib, Rebecca Lynne"	9301020	
+1751	COM	"Cantor, Madeline R."	F480660	
+1825	COM	"Ward, Molly"	480570	
+1959	COM	"Kim, Seonjae"	MTF660670	
+2702	COM	"Fossner, Lily Sophia"	570660	
+1743	COM	"Kim, Seonjae"	MTF670680	
+2026	COM	"Slusar, Catharine Kevin"	F680860	
+1794	COM	"Cruz, Felicia V."	660750	
+1795	COM	"Prince, Olive Kachina"	750840	
+2204	COM	"Cantor, Madeline R."	840930	
+1966	COM	"McDaniel, Justin"	MTF480490	
+2069	COM	"Slusar, Catharine Kevin"	MTF490500	
+2070	COM	"McDaniel, Justin"	MTF500510	
+2071	COM	"Brick, David Dean"	MTF510520	
+2072	COM	"Department staff, TBA"	MTF520530	
+2105	COM	"Cantor, Madeline R."	MTF530540	
+2003	COM	"Cantor, Madeline R."	MTF540550	
+2640	203	"Rose, Christina Marie"	480570	
+2141	127	"McDonogh, Gary Wray"	480570	
+2166	127	"McDonogh, Gary Wray"	570660	
+2186	127	"Lee, Min Kyung"	660750	
+2745	127	"Cohen, Jeffrey A."	750840	
+1882	127	"Voith, Daniela Holt"	F480600	
+1735	127	"Raddatz, Liv"	F600720	
+2133	127	"Lee, Min Kyung"	F720840	
+1849	127	"Cohen, Jeffrey A."	MTF840850	
+2142	127	"Raddatz, Liv"	MTF850860	
+1809	F	"Sanquer, Marie"	MTF480540	
+1810	F	"Ragueneau, Corine M"	MTF540600	
+1811	F	"Suaudeau, Julien Mathieu"	MTF600660	
+1852	F	"Zeiss, Agnes C"	MTF660720	
+1855	F	"Armstrong, Grace Morgan"	MTF720780	
+1856	F	"Zeiss, Agnes C"	MTF780840	
+1857	F	"Mahuzier, Brigitte"	MTF840900	
+1858	F	"Suaudeau, Julien Mathieu"	MTF900960	
+1812	F	"Shen, Qinna"	MTF9601020	
+1859	F	"Seyhan, Azade"	MTF10201080	
+1905	F	"White, Susan A."	480570	
+1896	F	"Seselj, Maja"	570660	
+1817	300	"Stavis, Jesse Samuel"	MTF480540	
+1730	300	"Darwish, Manar"	MTF540600	
+1816	300	"Baertschi, Annette Martine"	MTF600660	
+1863	300	"Grigoryan, Bella"	MTF660720	
+1879	300	"Barber, Donald"	480570	
+1842	300	"Weil, Arlo Brandon"	MTF720780	
+1843	300	"Weil, Arlo Brandon"	MTF780840	
+1844	300	"Weil, Arlo Brandon"	MTF840900	
+2654	300	"Wien, Michelle W."	MTF900960	
+1762	300	"Greif, Karen F."	MTF9601020	
+1763	300	"Davis, Tamara L."	MTF10201080	
+1764	300	"Skirkanich, Jennifer Nicole"	MTF10801140	
+1765	300	"Skirkanich, Jennifer Nicole"	MTF11401200	
+2396	300	"VanSickle, Caroline Marie"	480570	
+2397	300	"VanSickle, Caroline Marie"	570660	
+2398	300	"VanSickle, Caroline Marie"	660750	
+2399	300	"VanSickle, Caroline Marie"	750840	
+2150	300	"Grigoryan, Bella"	840930	
+1989	300	"Walsh, Irina K."	9301020	
+1744	300	"Walsh, Irina K."	MTF480540	
+2698	300	"Borghini, Andrea"	10201110	
+1819	300	"Barber, Donald"	11101200	
+1835	300	"Weil, Arlo Brandon"	MTF540550	
+1833	300	"Davis, Tamara L."	F480580	
+1906	300	"Greif, Karen F."	480570	
+1766	300	"Skirkanich, Jennifer Nicole"	MTF580640	
+1767	300	"Skirkanich, Jennifer Nicole"	MTF640700	
+2655	300	"Wien, Michelle W."	F700890	
+2656	300	"Wien, Michelle W."	F8901080	
+1834	300	"Shapiro, Joshua"	570660	
+1798	300	"Davis, Gregory Keith"	MTF10801140	
+1760	300	"VanSickle, Caroline Marie"	F480630	
+2114	300	"Seselj, Maja"	480570	
+2590	300	"Campoamor, Leigh Miranda"	570660	
+2591	300	"Campoamor, Leigh Miranda"	660750	
+1991	300	"Rojavin, Marina"	MTF630690	
+1958	300	"Marenco, Pedro Jose"	750840	
+1996	300	"Weil, Arlo Brandon"	F690810	
+1928	300	"Marenco, Pedro Jose"	840930	
+1824	300	"Brodfuehrer, Peter D."	MTF810870	
+1840	300	"Campoamor, Leigh Miranda"	F480630	
+1846	300	"Pashigian, Melissa J."	F630750	
+2051	300	"Barber, Donald"	MTF750760	
+2052	300	"Hearth, Selby Christine Hardy"	MTF760770	
+2053	300	"Marenco, Katherine Nicholson"	MTF770780	
+2054	300	"Marenco, Pedro Jose"	MTF780790	
+2055	300	"Weil, Arlo Brandon"	MTF790800	
+2657	300	"Wien, Michelle W."	F800990	
+1847	300	"Yin, Melinda Ray-Lin"	480570	
+1851	300	"Chander, Monica"	570660	
+2037	300	"Brodfuehrer, Peter D."	MTF9901000	
+2038	300	"Chander, Monica"	MTF10001010	
+2039	300	"Davis, Gregory Keith"	MTF10101020	
+2040	300	"Davis, Tamara L."	MTF10201030	
+2041	300	"Greif, Karen F."	MTF10301040	
+2042	300	"Mozdzer, Thomas"	MTF10401050	
+2043	300	"Shapiro, Joshua"	MTF10501060	
+2769	110	"Skirkanich, Jennifer Nicole"	F480660	
+1802	110	"Mozdzer, Thomas"	480570	
+1995	110	"Mozdzer, Thomas"	F660840	
+2020	110	"Shapiro, Joshua"	F8401020	
+1893	025	"Lillehaugen, Brook Danielle"	480570	
+2387	025	"Noel, Michael"	MTF480540	
+1935	025	"Daniel, Kathryne Jeannine"	MTF540600	
+2388	025	"Bahreyni, Newshaw"	MTF600660	
+2390	025	"Matlin, Mark"	F660780	
+1936	025	"Bahreyni, Newshaw"	F780960	
+1937	025	"Bahreyni, Newshaw"	F9601140	
+2395	025	"Bahreyni, Newshaw"	MTF11401200	
+2380	025	"Karagiaridi, Olga"	F480690	
+2381	025	"Karagiaridi, Olga"	F690900	
+1972	025	"Goldsmith, Jonas I."	480570	
+2389	025	"Matlin, Mark"	F9001020	
+1808	025	"Schaffner, David A"	MTF10201080	

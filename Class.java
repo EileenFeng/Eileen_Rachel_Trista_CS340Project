@@ -4,17 +4,16 @@ class Class {
 	private final String subject;
 	private Teacher teacher;
 	private Room room;
-	private Boolean[] meetDate;  // if meet Monday, meetDate[0] is true
+	private Boolean[] meetDate = {false, false, false, false, false};;  // if meet Monday, meetDate[0] is true
 	private Time time;
 
 	public Class(int id, int cap, String catalog, int length, String subject, Teacher teacher) {
 		this.id = id;
 		this.cap = cap;
-		this.catalog = catalog; 
+		this.catalog = catalog;
 		this.length = length;
 		this.subject = subject;
 		this.teacher = teacher;
-		this.meetDate = new Boolean[5];
 	}
 
 	public int getId() {

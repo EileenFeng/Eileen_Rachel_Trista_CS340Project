@@ -24,7 +24,7 @@ class Time {
 
 
 	public int getInterval() {
-		return (start - end);
+		return end - start;
 	}
 
 	@Override

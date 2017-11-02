@@ -3,7 +3,7 @@ import java.util.*;
 class Teacher {
 	private final String name;
 	private Set<Class> classes;
-	private Map<String, Set<Time>> times; 
+	private Map<String, Set<Time>> times;
 
 	public Teacher(String name) {
 		this.name = name;
@@ -32,6 +32,10 @@ class Teacher {
 	}
 
 	public boolean conflict(String date, Time t){
+		if (times.get(date) == null) {
+			times.put(date, new HashSet<>());
+			return false;
+		}
 		for(Time temp: times.get(date)){
 			if(temp.getStart() <= t.getEnd() && t.getStart() <= temp.getEnd()){
 				return true;
