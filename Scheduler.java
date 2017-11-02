@@ -19,9 +19,10 @@ public class Scheduler {
 		Map<String, List<Class>> classes = new HashMap<>(); // key: department, value: list of classes under the department, order by decreasing cap
 		Map<String, List<Room>> rooms = new HashMap<>(); // key: building, value: list of rooms, sort by decreasing order of size
 		Map<String, Set<String>> buildings = new HashMap<>(); // key: building, value: list of departments
+		StudentPref sp = new StudentPref();
 		//Map<String, Teacher> teachers = new HashMap<>();  //key: teacher name, value: Teacher object
 		Time dayTime = readConstraints(constraintFilePath).getTime();
-		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime);
+		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime, sp);
 
 		BufferedWriter writer = null;
 		try {
@@ -102,7 +103,7 @@ public class Scheduler {
 		//}
 	//}
 
-	public int readInput(String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
+	public int readInput(String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime, StudentPref sp) {
 		int totalClasses = 0;
 		String delim = ",";
 		BufferedReader reader = null;
@@ -133,6 +134,8 @@ public class Scheduler {
 			List<Room> roomList = rooms.get(building);
 			Collections.sort(roomList, (a, b) -> (b.getSize() - a.getSize()));
 		}
+
+		sp.generatePrefs(classes);
 
 		return totalClasses;
 	}
