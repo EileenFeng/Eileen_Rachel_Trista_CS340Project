@@ -63,12 +63,26 @@ public class Scheduler {
 										}
 										writer.write(start+" ");
 										writer.write(end);
-										writer.write('\t');
+										writer.write('\t'+'\t');
+										List<Integer> stdPre = sp.getStdList(c.getId());
+										if(stdPre != null) {
+											int stdNum = 0;
+											while(stdNum < c.getCap() && stdNum < stdPre.size()){
+												c.addStudent(stdPre.get(stdNum));
+												writer.write(Integer.toString(stdPre.get(stdNum)) + " ");
+												stdNum ++;
+											}
+											while(stdNum < stdPre.size()) {
+												sp.removeClass(stdPre.get(stdNum), c);
+												stdNum ++;
+											}
+										}
 										writer.newLine();
 									}
 								}
 								classIndex++;
 							}
+
 							if (roomIndex < rs.size() - 1) {
 								roomIndex++;
 							}

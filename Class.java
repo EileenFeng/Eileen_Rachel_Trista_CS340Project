@@ -1,3 +1,5 @@
+import java.util.*;
+
 class Class {
 	private final int id, cap, length;
 	private final String catalog;
@@ -6,6 +8,7 @@ class Class {
 	private Room room;
 	private Boolean[] meetDate = {false, false, false, false, false};;  // if meet Monday, meetDate[0] is true
 	private Time time;
+	private List<Integer> students;
 
 	public Class(int id, int cap, String catalog, int length, String subject, Teacher teacher) {
 		this.id = id;
@@ -14,6 +17,7 @@ class Class {
 		this.length = length;
 		this.subject = subject;
 		this.teacher = teacher;
+		this.students = new ArrayList<Integer>();
 	}
 
 	public int getId() {
@@ -75,20 +79,24 @@ class Class {
 		return "";
 	}
 
-	
+	public int addStudent(int stdId) {
+		students.add(stdId);
+		return stdId;
+	}
+
  	@Override
  	public int hashCode() {
  		return id;
  	}
- 
+
  	@Override
  	public boolean equals(Object o) {
  		if (o == this) return true;
        	if (!(o instanceof Class)) {
          	return false;
       	}
- 		Class that = (Class)obj;
+ 		Class that = (Class)o;
  		return this.id == that.id;
  	}
-	 
+
 }

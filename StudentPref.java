@@ -3,7 +3,7 @@ import java.io.*;
 
 class StudentPref {
 	private final int NUM_PREFS = 4;
-	private final int NUM_STUDENTS = 100;
+	private final int NUM_STUDENTS = 1000;
 	private Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
 	private Map<Integer, List<Integer>> invertedPrefs; // key: class id, value: student ids
 
@@ -58,23 +58,28 @@ class StudentPref {
 			prefs.put(id, new ArrayList<>());
 			for (int i = 0; i < NUM_PREFS; i++) {
 				rands[i] = (int)(Math.random() * idList.size());
-				prefs.get(id).add(rands[i]);
+				prefs.get(id).add(idList.get(rands[i]));
 			}
 		}
 
 	}
 
 	public void removeClass(int id, Class klass) {
-		List<Class> pref = prefs.get(id);
-		for (Class k : pref) {
-			if (klass.equals(k)) {
-				pref.remove(k);
+		List<Integer> pref = prefs.get(id);
+		int classId = klass.getId();
+		int index = -1;
+		for (int i = 0; i < pref.size(); i++) {
+			if (pref.get(i) == classId) {
+				index = i;
 			}
+		}
+		if (index != -1) {
+			pref.remove(index);
 		}
 	}
 
 	public void invertPrefs() {
-		for (Integer student : prefs) {
+		for (Integer student : prefs.keySet()) {
 			List<Integer> classIds = prefs.get(student);
 			for (Integer classId : classIds) {
 				if (!invertedPrefs.containsKey(classId)) {
@@ -83,5 +88,13 @@ class StudentPref {
 				invertedPrefs.get(classId).add(student);
 			}
 		}
+	}
+
+	public Map<Integer, List<Integer>> getInvertedPref() {
+		return invertedPrefs;
+	}
+
+	public List<Integer> getStdList(int classId) {
+		return invertedPrefs.get(classId);
 	}
 }
