@@ -1,8 +1,7 @@
 import java.util.*;
 
 class Class {
-	private final int id, length;
-	private final String catalog;
+	private final int id, length, level;
 	private final String subject;
 	private Teacher teacher;
 	private Room room;
@@ -10,9 +9,9 @@ class Class {
 	private Time time;
 	private List<Integer> students;
 
-	public Class(int id, String catalog, int length, String subject, Teacher teacher) {
+	public Class(int id, int level, int length, String subject, Teacher teacher) {
 		this.id = id;
-		this.catalog = catalog;
+		this.level = level;
 		this.length = length;
 		this.subject = subject;
 		this.teacher = teacher;
@@ -32,7 +31,7 @@ class Class {
 	}
 
 	public int getLevel() {
-		return catalog.charAt(1) - '0';
+		return level;
 	}
 
 	public Teacher getTeacher() {

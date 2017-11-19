@@ -17,7 +17,7 @@ public class Scheduler {
 		// class of different level could be assigned at same time
 		// already have classes and rooms
 		int numScheduled = 0;
-		Map<String, List<Class>> classes = new HashMap<>(); // key: department, value: list of classes under the department, order by decreasing cap
+		Map<String, List<Class>> classes = new HashMap<>(); // key: department, value: list of classes under the department, order by increasing level
 		Map<String, List<Room>> rooms = new HashMap<>(); // key: building, value: list of rooms, sort by decreasing order of size
 		Map<String, Set<String>> buildings = new HashMap<>(); // key: building, value: list of departments
 		StudentPref sp = new StudentPref();
@@ -75,7 +75,7 @@ public class Scheduler {
 										List<Integer> stdPre = sp.getStdList(c.getId());
 										if(stdPre != null) {
 											int stdNum = 0;
-											while(stdNum < c.getCap() && stdNum < stdPre.size()){
+											while(stdNum < r.getSize() && stdNum < stdPre.size()){
 												int stuId = stdPre.get(stdNum);
 												c.addStudent(stuId);
 												writer.write(Integer.toString(stuId) + " ");
@@ -164,7 +164,7 @@ public class Scheduler {
 		return totalClasses;
 	}
 
-	public int processLine(String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
+	public int processLine(Map<String, int> allRoomsCap,String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
 		if (!Character.isDigit(fields[1].charAt(0))) {
 			return 0;
 		}
@@ -172,16 +172,21 @@ public class Scheduler {
 		//int cap = Integer.parseInt(fields[fields.length - 14]);
 		//int roomCap = Integer.parseInt(fields[fields.length - 1]);
 		String subject = fields[2];
-		int catalog = fields[4], teacherName = fields[11];
-		//String building = fields[20], room = fields[fields.length - 4];
-		String startTime = fields[fields.length - 7], endTime = fields[fields.length - 6];
+		int level = fields[4], teacherName = fields[11];
+		String building = fields[20], room = fields[21];
+		String startTime = fields[13], endTime = fields[16];
+		String roomName = building + room;
+		int roomCap = 0;
+		if (allRoomsCap.contains(roomName)){
+			roomCap = allRoomsCap.get(roomName);
+		}
 		int length = convertTimeToMinute(endTime) - convertTimeToMinute(startTime) + 10;
-		if (cap == 0 || length == 0) {
+		if (length == 0) {
 			//System.out.println("invalid class: " + id + ", discarded");
 			return 0;
 		}
 
-		Class klass = new Class(id, catalog, length, subject, new Teacher(teacherName));
+		Class klass = new Class(id, level, length, subject, new Teacher(teacherName));
 		if (!classes.containsKey(subject)) {
 			classes.put(subject, new ArrayList<>());
 		}

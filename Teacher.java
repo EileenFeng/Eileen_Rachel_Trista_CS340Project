@@ -1,17 +1,17 @@
 import java.util.*;
 
 class Teacher {
-	private final String name;
+	private final int name;
 	private Set<Class> classes;
 	private Map<String, Set<Time>> times;
 
-	public Teacher(String name) {
+	public Teacher(int name) {
 		this.name = name;
 		this.classes = new HashSet<>();
 		this.times = new HashMap<>();
 	}
 
-	public String getName() {
+	public int getName() {
 		return name;
 	}
 
