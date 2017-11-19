@@ -148,7 +148,7 @@ public class Scheduler {
 
 		for (String dept : classes.keySet()) {
 			List<Class> classList = classes.get(dept);
-			Collections.sort(classList, (a, b) -> (b.getCap() - a.getCap()));
+			Collections.sort(classList, (a, b) -> (b.getLevel() - a.getLevel()));
 		}
 
 		for (String building : rooms.keySet()) {
