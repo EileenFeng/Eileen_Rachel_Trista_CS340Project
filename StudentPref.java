@@ -2,8 +2,8 @@ import java.util.*;
 import java.io.*;
 
 class StudentPref {
-	private final int NUM_PREFS = 4;
-	private final int NUM_STUDENTS = 2000;
+	public static int NUM_PREFS = 4;
+	public static final int NUM_STUDENTS = 700;
 	private Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
 	private Map<Integer, List<Integer>> invertedPrefs; // key: class id, value: student ids
 
@@ -14,6 +14,15 @@ class StudentPref {
 
 	public Map<Integer, List<Integer>> getPrefs() {
 		return prefs;
+	}
+
+	public Boolean hasClass(int id){
+		List<Integer> classes = prefs.get(id);
+		Boolean empty = classes == null || classes.isEmpty();
+		if(!empty){
+			Scheduler.studentPrefsValue += classes.size();
+		}
+		return empty;
 	}
 
 	public void readPref(String filePath) {
@@ -64,7 +73,7 @@ class StudentPref {
 	    		index ++;
 	    	}
 	    	writer.newLine();
-	    } 
+	    }
 	  } catch (IOException ex) {
 	    	System.out.println("Can't write!!!!!!!!!!!!!!!!!!");
 	    } finally {

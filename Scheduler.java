@@ -3,6 +3,7 @@ import java.io.*;
 
 public class Scheduler {
 	private int studentsAssigned = 0;
+	public static int studentPrefsValue = 0;
 	public static void main(String[] args) {
 		if(args.length < 2){
 			System.out.println("Invalid input");
@@ -20,12 +21,13 @@ public class Scheduler {
 		Map<String, List<Class>> classes = new HashMap<>(); // key: department, value: list of classes under the department, order by increasing level
 		Map<String, List<Room>> rooms = new HashMap<>(); // key: building, value: list of rooms, sort by decreasing order of size
 		Map<String, Set<String>> buildings = new HashMap<>(); // key: building, value: list of departments
+		Set<Integer> classesRead = new HashSet<>(); // id of classes processed
 		StudentPref sp = new StudentPref();
 		//Map<String, Teacher> teachers = new HashMap<>();  //key: teacher name, value: Teacher object
 		Constraints constraints = readConstraints(constraintFilePath);
 		Time dayTime = constraints.getTime();
 		Map<String, Integer> allRoomsCap = constraints.getRoomCaps();
-		int numClasses = readInput(allRoomsCap, inputFilePath, classes, rooms, buildings, dayTime, sp);
+		int numClasses = readInput(allRoomsCap, inputFilePath, classes, rooms, buildings, dayTime, sp, classesRead);
 		sp.writePref();
 		//sp.readPref("student_prefs.txt");
 		sp.invertPrefs();
@@ -34,13 +36,13 @@ public class Scheduler {
 		try {
 		   	writer = new BufferedWriter(new OutputStreamWriter(
 		          new FileOutputStream("schedule.txt"), "utf-8"));
-		    writer.write("Course"+'\t'+"Room"+'\t'+"Teacher"+'\t'+"Time"+'\t'+"Students");
+		    writer.write("Course"+"\t\t"+"Room"+"\t\t"+"Teacher"+"\t\t"+"Time"+"\t\t"+"Students");
 		    writer.newLine();
 		    for(String building : buildings.keySet()){
 					List<Room> rs = rooms.get(building);
 					Set<String> ds = buildings.get(building);
 					int roomIndex = 0;
-					for (int level = 0; level <= 7; level++) {
+					for (int level = 0; level <= 5; level++) {
 						for (String dept : ds) {
 							List<Class> cs = classes.get(dept);
 							int classIndex = 0;
@@ -57,7 +59,7 @@ public class Scheduler {
 											writer.write(building+" "+r.getNumber());
 										}
 										writer.write('\t');
-										writer.write(c.getTeacher().getName());
+										writer.write(Integer.toString(c.getTeacher().getName()));
 										writer.write('\t');
 										writer.write(c.getMeetDate()+" ");
 										String start = "", end = "";
@@ -100,7 +102,12 @@ public class Scheduler {
 						}
 					}
 			}
-			writer.write("Total number of students assigned is: " + Integer.toString(studentsAssigned));
+			for(int id = 0; id < StudentPref.NUM_STUDENTS; id++){
+				if(!sp.hasClass(id)){
+					studentsAssigned ++;
+				}
+			}
+			writer.write("Total number of students assigned is: " + Integer.toString(studentsAssigned) + " student preference value is: " + studentPrefsValue);//Integer.toString(studentPrefsValue));
 		} catch (IOException ex) {
 		  	System.out.println("Create and write file failed");
 		} finally {
@@ -129,7 +136,7 @@ public class Scheduler {
 		//}
 	//}
 
-	public int readInput(Map<String, Integer> roomcap, String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime, StudentPref sp) {
+	public int readInput(Map<String, Integer> roomcap, String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime, StudentPref sp, Set<Integer> classesRead) {
 		int totalClasses = 0;
 		String delim = ",";
 		BufferedReader reader = null;
@@ -139,7 +146,7 @@ public class Scheduler {
 			reader = new BufferedReader(new FileReader(filePath));
 			while ((line = reader.readLine()) != null) {
 				String[] fields = line.split(delim);
-				totalClasses += processLine(roomcap, fields, classes, rooms, buildings, dayTime);
+				totalClasses += processLine(roomcap, fields, classes, rooms, buildings, classesRead, dayTime);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -153,7 +160,7 @@ public class Scheduler {
 
 		for (String dept : classes.keySet()) {
 			List<Class> classList = classes.get(dept);
-			Collections.sort(classList, (a, b) -> (b.getLevel() - a.getLevel()));
+			Collections.sort(classList, (a, b) -> (a.getLevel() - b.getLevel()));
 		}
 
 		for (String building : rooms.keySet()) {
@@ -166,16 +173,29 @@ public class Scheduler {
 		return totalClasses;
 	}
 
-	public int processLine(Map<String, Integer> allRoomsCap,String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
+	public int processLine(Map<String, Integer> allRoomsCap,String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Set<Integer> classesRead, Time dayTime) {
 		if (!Character.isDigit(fields[1].charAt(0))) {
 			return 0;
 		}
 		int id = Integer.parseInt(fields[1]);
+		if (classesRead.contains(id)) {
+			return 0;
+		}
 		//int cap = Integer.parseInt(fields[fields.length - 14]);
 		//int roomCap = Integer.parseInt(fields[fields.length - 1]);
 		String subject = fields[2];
+		// check if instructor id is empty
+		if (fields[11].length() == 0) {
+			return 0;
+		}
+		classesRead.add(id);
 		int level = Integer.parseInt(fields[4]), teacherName = Integer.parseInt(fields[11]);
-		String building = fields[20], room = fields[21];
+		//tem.out.println(Arrays.toString(fields));
+		if (fields.length < 21) {
+			return 0;
+		}
+		String room = fields.length == 21 ? "" : fields[21];
+		String building = fields[20];
 		String startTime = fields[13], endTime = fields[16];
 		String roomName = building + room;
 		int roomCap = 0;
@@ -247,21 +267,22 @@ public class Scheduler {
 			String[] pieces = line.split(" ");
 			while (!pieces[0].equals("start")) {
 				line = reader.readLine();
+				pieces = line.split(" ");
 			}
-			line = reader.readLine();
-			pieces = line.split(" ");
+
 			startTime = pieces[2] + " " + pieces[3];
 			line = reader.readLine();
 			pieces = line.split(" ");
 			endTime = pieces[2] + " " + pieces[3];
-			constraints.setTimeRange(new Time(Integer.parseInt(startTime), Integer.parseInt(endTime)));
+			constraints.setTimeRange(new Time(convertTimeToMinute(startTime), convertTimeToMinute(endTime)));
 
 			line = reader.readLine();
-			int numLines = Integer.parseInt(line.split(" ")[1]);
+			pieces = line.split("\t");
+			int numLines = Integer.parseInt(pieces[1]);
 			Map<String, Integer> roomCaps = new HashMap<>();
 			for (int i = 0; i < numLines; i++) {
 				line = reader.readLine();
-				pieces = line.split(" ");
+				pieces = line.split("\t");
 				roomCaps.put(pieces[0], Integer.parseInt(pieces[1]));
 			}
 			constraints.setRoomCaps(roomCaps);
