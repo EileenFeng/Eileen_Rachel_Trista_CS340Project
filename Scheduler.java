@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Scheduler {
+	private int studentsAssigned = 0;
 	public static void main(String[] args) {
 		if(args.length < 2){
 			System.out.println("Invalid input");
@@ -24,7 +25,7 @@ public class Scheduler {
 		Time dayTime = readConstraints(constraintFilePath).getTime();
 		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime, sp);
 		sp.writePref();
-		sp.readPref("student_prefs.txt");
+		//sp.readPref("student_prefs.txt");
 		sp.invertPrefs();
 
 		BufferedWriter writer = null;
@@ -75,8 +76,9 @@ public class Scheduler {
 										if(stdPre != null) {
 											int stdNum = 0;
 											while(stdNum < c.getCap() && stdNum < stdPre.size()){
-												c.addStudent(stdPre.get(stdNum));
-												writer.write(Integer.toString(stdPre.get(stdNum)) + " ");
+												int stuId = stdPre.get(stdNum);
+												c.addStudent(stuId);
+												writer.write(Integer.toString(stuId) + " ");
 												stdNum ++;
 											}
 											while(stdNum < stdPre.size()) {
@@ -96,6 +98,7 @@ public class Scheduler {
 						}
 					}
 			}
+			writer.write("Total number of students assigned is: " + Integer.toString(studentsAssigned));
 		} catch (IOException ex) {
 		  	System.out.println("Create and write file failed");
 		} finally {
@@ -162,14 +165,15 @@ public class Scheduler {
 	}
 
 	public int processLine(String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
-		if (!Character.isDigit(fields[0].charAt(0))) {
+		if (!Character.isDigit(fields[1].charAt(0))) {
 			return 0;
 		}
-		int id = Integer.parseInt(fields[0]);
-		int cap = Integer.parseInt(fields[fields.length - 14]);
-		int roomCap = Integer.parseInt(fields[fields.length - 1]);
-		String subject = fields[1], catalog = fields[2], teacherName = fields[6] + ", " + fields[7];
-		String building = fields[fields.length - 5], room = fields[fields.length - 4];
+		int id = Integer.parseInt(fields[1]);
+		//int cap = Integer.parseInt(fields[fields.length - 14]);
+		//int roomCap = Integer.parseInt(fields[fields.length - 1]);
+		String subject = fields[2];
+		int catalog = fields[4], teacherName = fields[11];
+		//String building = fields[20], room = fields[fields.length - 4];
 		String startTime = fields[fields.length - 7], endTime = fields[fields.length - 6];
 		int length = convertTimeToMinute(endTime) - convertTimeToMinute(startTime) + 10;
 		if (cap == 0 || length == 0) {
@@ -177,7 +181,7 @@ public class Scheduler {
 			return 0;
 		}
 
-		Class klass = new Class(id, cap, catalog, length, subject, new Teacher(teacherName));
+		Class klass = new Class(id, catalog, length, subject, new Teacher(teacherName));
 		if (!classes.containsKey(subject)) {
 			classes.put(subject, new ArrayList<>());
 		}
