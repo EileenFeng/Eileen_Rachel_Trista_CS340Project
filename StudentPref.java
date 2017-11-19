@@ -85,12 +85,12 @@ class StudentPref {
 			}
 		}
 		idList.addAll(ids);
-		int[] rands = new int[NUM_PREFS];
+		//int[] rands = new int[NUM_PREFS];
 		for (int id = 1; id <= NUM_STUDENTS; id++) {
 			prefs.put(id, new ArrayList<>());
 			for (int i = 0; i < NUM_PREFS; i++) {
-				rands[i] = (int)(Math.random() * idList.size());
-				prefs.get(id).add(idList.get(rands[i]));
+				int randId = (int)(Math.random() * idList.size());
+				prefs.get(id).add(idList.get(randId));
 			}
 		}
 

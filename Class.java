@@ -1,7 +1,7 @@
 import java.util.*;
 
 class Class {
-	private final int id, cap, length;
+	private final int id, length;
 	private final String catalog;
 	private final String subject;
 	private Teacher teacher;
@@ -10,9 +10,8 @@ class Class {
 	private Time time;
 	private List<Integer> students;
 
-	public Class(int id, int cap, String catalog, int length, String subject, Teacher teacher) {
+	public Class(int id, String catalog, int length, String subject, Teacher teacher) {
 		this.id = id;
-		this.cap = cap;
 		this.catalog = catalog;
 		this.length = length;
 		this.subject = subject;
@@ -26,10 +25,6 @@ class Class {
 
 	public int getLength() {
 		return length;
-	}
-
-	public int getCap() {
-		return cap;
 	}
 
 	public String getSubject() {
