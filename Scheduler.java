@@ -225,6 +225,7 @@ public class Scheduler {
 	}
 //here
 	public Constraints readConstraints(String filePath) {
+		Constraints constraints = new Constraints();
 		BufferedReader reader = null;
 		String line = "";
 		String startTime = "", endTime = "";
@@ -233,10 +234,26 @@ public class Scheduler {
 			reader = new BufferedReader(new FileReader(filePath));
 			line = reader.readLine();
 			String[] pieces = line.split(" ");
+			while (!pieces[0].equals("start")) {
+				line = reader.readLine();
+			}
+			line = reader.readLine();
+			pieces = line.split(" ");
 			startTime = pieces[2] + " " + pieces[3];
 			line = reader.readLine();
 			pieces = line.split(" ");
 			endTime = pieces[2] + " " + pieces[3];
+			constraints.setTimeRange(new Time(Integer.parseInt(startTime), Integer.parseInt(endTime)));
+
+			line = reader.readLine();
+			int numLines = Integer.parseInt(line.split(" ")[1]);
+			Map<String, Integer> roomCaps = new HashMap<>();
+			for (int i = 0; i < numLines; i++) {
+				line = reader.readLine();
+				pieces = line.split(" ");
+				roomCaps.put(pieces[0], Integer.parseInt(pieces[1]));
+			}
+			constraints.setRoomCaps(roomCaps);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -246,18 +263,36 @@ public class Scheduler {
 				e.printStackTrace();
 			}
 		}
-		return new Constraints(new Time(convertTimeToMinute(startTime), convertTimeToMinute(endTime)));
+		return constraints;
 	}
 }
 
 class Constraints {
 	Time timeRange;
+	Map<String, Integer> roomCaps;
 
-	public Constraints(Time timeRange) {
+	public Constraints() {
+
+	}
+
+	public Constraints(Time timeRange, Map<String, Integer> roomCaps) {
 		this.timeRange = timeRange;
+		this.roomCaps = roomCaps;
+	}
+
+	public void setTimeRange(Time timeRange) {
+		this.timeRange = timeRange;
+	}
+
+	public void setRoomCaps(Map<String, Integer> roomCaps) {
+		this.roomCaps = roomCaps;
 	}
 
 	public Time getTime() {
 		return timeRange;
+	}
+
+	public Map<String, Integer> getRoomCaps() {
+		return roomCaps;
 	}
 }
