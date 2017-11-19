@@ -22,8 +22,10 @@ public class Scheduler {
 		Map<String, Set<String>> buildings = new HashMap<>(); // key: building, value: list of departments
 		StudentPref sp = new StudentPref();
 		//Map<String, Teacher> teachers = new HashMap<>();  //key: teacher name, value: Teacher object
-		Time dayTime = readConstraints(constraintFilePath).getTime();
-		int numClasses = readInput(inputFilePath, classes, rooms, buildings, dayTime, sp);
+		Constraints constraints = readConstraints(constraintFilePath);
+		Time dayTime = constraints.getTime();
+		Map<String, Integer> allRoomsCap = constraints.getRoomCaps();
+		int numClasses = readInput(allRoomsCap, inputFilePath, classes, rooms, buildings, dayTime, sp);
 		sp.writePref();
 		//sp.readPref("student_prefs.txt");
 		sp.invertPrefs();
@@ -127,7 +129,7 @@ public class Scheduler {
 		//}
 	//}
 
-	public int readInput(String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime, StudentPref sp) {
+	public int readInput(Map<String, Integer> roomcap, String filePath, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime, StudentPref sp) {
 		int totalClasses = 0;
 		String delim = ",";
 		BufferedReader reader = null;
@@ -137,7 +139,7 @@ public class Scheduler {
 			reader = new BufferedReader(new FileReader(filePath));
 			while ((line = reader.readLine()) != null) {
 				String[] fields = line.split(delim);
-				totalClasses += processLine(fields, classes, rooms, buildings, dayTime);
+				totalClasses += processLine(roomcap, fields, classes, rooms, buildings, dayTime);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -164,7 +166,7 @@ public class Scheduler {
 		return totalClasses;
 	}
 
-	public int processLine(Map<String, int> allRoomsCap,String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
+	public int processLine(Map<String, Integer> allRoomsCap,String[] fields, Map<String, List<Class>> classes, Map<String, List<Room>> rooms, Map<String, Set<String>> buildings, Time dayTime) {
 		if (!Character.isDigit(fields[1].charAt(0))) {
 			return 0;
 		}
@@ -172,12 +174,12 @@ public class Scheduler {
 		//int cap = Integer.parseInt(fields[fields.length - 14]);
 		//int roomCap = Integer.parseInt(fields[fields.length - 1]);
 		String subject = fields[2];
-		int level = fields[4], teacherName = fields[11];
+		int level = Integer.parseInt(fields[4]), teacherName = Integer.parseInt(fields[11]);
 		String building = fields[20], room = fields[21];
 		String startTime = fields[13], endTime = fields[16];
 		String roomName = building + room;
 		int roomCap = 0;
-		if (allRoomsCap.contains(roomName)){
+		if (allRoomsCap.containsKey(roomName)){
 			roomCap = allRoomsCap.get(roomName);
 		}
 		int length = convertTimeToMinute(endTime) - convertTimeToMinute(startTime) + 10;
