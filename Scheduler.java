@@ -9,7 +9,10 @@ public class Scheduler {
 			System.out.println("Invalid input");
 		} else {
 			Scheduler classScheduler = new Scheduler();
+			long start = System.currentTimeMillis();
 			classScheduler.schedule(args[0], args[1]);
+			long end = System.currentTimeMillis();
+			System.out.println("Total running time: " + (end - start) + " milliseconds");
 		}
 	}
 
