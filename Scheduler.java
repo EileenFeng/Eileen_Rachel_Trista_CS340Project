@@ -4,6 +4,7 @@ import java.io.*;
 public class Scheduler {
 	private int studentsAssigned = 0;
 	public static int studentPrefsValue = 0;
+	public static Map<Integer, Class> classMap = new HashMap<>(); //key: classId, value: class object
 	public static void main(String[] args) {
 		if(args.length < 3){
 			System.out.println("Invalid input");
@@ -216,6 +217,7 @@ public class Scheduler {
 		}
 		klass.getTeacher().classes().add(klass);
 		classes.get(subject).add(klass);
+		classMap.put(id, klass);
 
 		// if(! teachers.containsKey(teacherName)) {
 		// 	Teacher teacher = new Teacher(teacherName);

@@ -4,7 +4,7 @@ import java.io.*;
 class StudentPref {
 	public static int NUM_PREFS = 4;
 	public static final int NUM_STUDENTS = 700;
-	private Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
+	public static Map<Integer, List<Integer>> prefs; // key: student id, value: class ids
 	private Map<Integer, List<Integer>> invertedPrefs; // key: class id, value: student ids
 
 	public StudentPref() {

@@ -73,11 +73,19 @@ class Class {
 		return "";
 	}
 
-	public int addStudent(int stdId) {
+	public boolean addStudent(int stdId) {
+		List<Integer> stdprefs = StudentPref.prefs.get(stdId);
+		for(int c : stdprefs){
+			Class temp = Scheduler.classMap.get(c);
+			if(temp.getTime() != null && temp.getId() != id && temp.getTime().equals(time)){
+				StudentPref.prefs.get(stdId).remove((Integer)id);
+				return false;
+			}
+		}
 		students.add(stdId);
-		return stdId;
+		return true;
 	}
-
+	
  	@Override
  	public int hashCode() {
  		return id;
