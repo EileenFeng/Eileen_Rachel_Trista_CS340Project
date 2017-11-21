@@ -5,19 +5,19 @@ public class Scheduler {
 	private int studentsAssigned = 0;
 	public static int studentPrefsValue = 0;
 	public static void main(String[] args) {
-		if(args.length < 2){
+		if(args.length < 3){
 			System.out.println("Invalid input");
 		} else {
 			Scheduler classScheduler = new Scheduler();
 			long start = System.currentTimeMillis();
-			classScheduler.schedule(args[0], args[1]);
+			classScheduler.schedule(args[0], args[1], args[2]);
 			long end = System.currentTimeMillis();
 			System.out.println("Total running time: " + (end - start) + " milliseconds");
 		}
 	}
 
 	// read in input, process, and output
-	public void schedule(String inputFilePath, String constraintFilePath) {
+	public void schedule(String inputFilePath, String constraintFilePath, String outputFilePath) {
 		// class of different level could be assigned at same time
 		// already have classes and rooms
 		int numScheduled = 0;
@@ -38,7 +38,7 @@ public class Scheduler {
 		BufferedWriter writer = null;
 		try {
 		   	writer = new BufferedWriter(new OutputStreamWriter(
-		          new FileOutputStream("schedule.txt"), "utf-8"));
+		          new FileOutputStream(outputFilePath), "utf-8"));
 		    writer.write("Course"+"\t\t"+"Room"+"\t\t"+"Teacher"+"\t\t"+"Time"+"\t\t"+"Students");
 		    writer.newLine();
 		    for(String building : buildings.keySet()){
