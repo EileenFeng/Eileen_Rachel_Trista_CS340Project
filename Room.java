@@ -57,11 +57,13 @@ class Room {
 
 		for (int i = startDay; i < 5; i += interval) {
 			int oldStartTime = time.get(weekdays[i]).getStart();
+			int endTime = time.get(weekdays[i]).getEnd();
 			int newStartTime = oldStartTime + len;
 			Time temp = new Time(oldStartTime, newStartTime);
 			klass.setTime(temp);
 			klass.setMeetDate(i);  // each class only have one meeting time, but several meeting date, therefore only need to set one Time for each class but several dates for each class
-			time.get(weekdays[i]).setStart(newStartTime);
+			time.put(weekdays[i], new Time(newStartTime, endTime)); 
+			
 			Map<Time, Class> newClass = null;
 			if(! classSchedule.containsKey(weekdays[i])) {
 				newClass = new HashMap<>();

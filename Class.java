@@ -64,7 +64,7 @@ class Class {
 
 	public String getMeetDate() {
 		if((meetDate[0] && meetDate[2]) && meetDate[4]) {
-			return "MTF";
+			return "MWF";
 		} else if(meetDate[1] && meetDate[3]) {
 			return "TTH";
 		} else if(meetDate[4]) {

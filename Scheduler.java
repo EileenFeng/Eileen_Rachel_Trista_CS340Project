@@ -50,16 +50,17 @@ public class Scheduler {
 							List<Class> cs = classes.get(dept);
 							int classIndex = 0;
 							Room r = rs.get(roomIndex);
-							while (classIndex < cs.size() && !r.isFull()) {
+							while (classIndex < cs.size()) {
 								Class c = cs.get(classIndex);
 								if (c.getLevel() <= level && c.getTime() == null) {
 									if(r.addClass(c)) {
 										writer.write(Integer.toString(c.getId()));
 										writer.write('\t');
 										if(r.getNumber().equals("")) {
-											writer.write("-1");
+											writer.write("TBA");
 										} else {
-											writer.write(building+" "+r.getNumber());
+											writer.write(r.getNumber());
+											c.setRoom(r);
 										}
 										writer.write('\t');
 										writer.write(Integer.toString(c.getTeacher().getName()));
@@ -85,6 +86,7 @@ public class Scheduler {
 											while(stdNum < r.getSize() && stdNum < stdPre.size()){
 												int stuId = stdPre.get(stdNum);
 												c.addStudent(stuId);
+												studentPrefsValue ++;
 												writer.write(Integer.toString(stuId) + " ");
 												stdNum ++;
 											}
@@ -97,10 +99,9 @@ public class Scheduler {
 									}
 								}
 								classIndex++;
-							}
-
-							if (roomIndex < rs.size() - 1) {
-								roomIndex++;
+								if(r.isFull() && roomIndex < rs.size() - 1){
+									r = rs.get(++roomIndex);
+								}
 							}
 						}
 					}
@@ -207,7 +208,6 @@ public class Scheduler {
 		}
 		int length = convertTimeToMinute(endTime) - convertTimeToMinute(startTime) + 10;
 		if (length == 0) {
-			//System.out.println("invalid class: " + id + ", discarded");
 			return 0;
 		}
 
@@ -218,22 +218,18 @@ public class Scheduler {
 		klass.getTeacher().classes().add(klass);
 		classes.get(subject).add(klass);
 		classMap.put(id, klass);
-
-		// if(! teachers.containsKey(teacherName)) {
-		// 	Teacher teacher = new Teacher(teacherName);
-		// 	teacher.classes().add(klass)
-		// 	teachers.put(teacherName, teacher);
-		// }else{
-		// 	Teacher temp = teachers.get(teacherName);
-		// 	temp.classes().add(klass);
-		// }
-
 		if (!rooms.containsKey(building)) {
 			rooms.put(building, new ArrayList<>());
 		}
-
-		if (!rooms.get(building).contains(room)) {
-			rooms.get(building).add(new Room(room, roomCap, dayTime.getStart(), dayTime.getEnd()));
+		List<Room> list = rooms.get(building);
+		boolean flag = false;
+		for(Room r : list){
+			if(r.getNumber().equals(roomName)){
+				flag = true;
+			}
+		}
+		if (! flag) {
+			rooms.get(building).add(new Room(roomName, roomCap, dayTime.getStart(), dayTime.getEnd()));
 		}
 
 		if (!buildings.containsKey(building)) {

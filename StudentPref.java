@@ -19,9 +19,9 @@ class StudentPref {
 	public Boolean hasClass(int id){
 		List<Integer> classes = prefs.get(id);
 		Boolean empty = classes == null || classes.isEmpty();
-		if(!empty){
-			Scheduler.studentPrefsValue += classes.size();
-		}
+		// if(!empty){
+		// 	Scheduler.studentPrefsValue += classes.size();
+		// }
 		return empty;
 	}
 
