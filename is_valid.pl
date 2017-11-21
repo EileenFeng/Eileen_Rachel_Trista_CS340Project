@@ -63,7 +63,7 @@ while (<SCHED>) {
 			my $teacher = $3;
 			my $time = $4;
 			my $stus = $5;
-			if ($stus !~ /^(\d+ )*(\d+)?$/) {
+			if ($stus !~ /^(.*)*(\d+)?$/) {
 				print "Students have incorrect format.\n";
 				print "Students:$1\n";
 				exit 1;
@@ -78,16 +78,14 @@ while (<SCHED>) {
 				}
 
 				$courseRoom{$course} = $room;
-
 				if ($classsize > $roomSize{$room}) {
 					my $size = $roomSize{$room};
-					print "The capacity of $room is $size\n";
 					print "Room $room is too small to hold course $course with $classsize students.\n";
 					print "Line:$_\n";
 					#exit 1;
 				}
 
-				if ($origCourseTeacher{$course} != $teacher) {
+				if (!$origCourseTeacher{$course} eq $teacher) {
 					print "Course $course does not have the correct teacher.\n";
 					print "Line:$_\n";
 					#exit 1;
@@ -118,7 +116,7 @@ while (<SCHED>) {
 				foreach my $stu (@students) {
 					if (defined $studentCourses{$stu}) {
 						foreach my $cour (@{$studentCourses{$stu}}) {
-							if ($courseTime{$cour} == $time) {
+							if ($courseTime{$cour} eq $time) {
 								print "Student $stu assigned to time conflicting courses $cour and $course.\n";
 								print "Line:$_\n";
 								#exit 1;
@@ -165,25 +163,34 @@ sub readConstraints {
 	my $isclass = 0;
 	while (<CONSTRAINTS>) {
 		chomp $_;
-		if (/^Class Times\t(\d+)$/) {
-			$numslots = $1;
+		if (/^Class Times\t(.*)$/) {
+		    print "hahaha";
+		    $numslots = $1;
 		}
-		if (/^Rooms\t(\d+)$/) {
+		if (/^start(.*)$/){
+		    print "eiheheheh";
+		}
+		if(/^end(.*)$/){
+		    print "hahahaeiaohei";
+		}
+		if (/^Rooms\t(.*)$/) {
 			$numrooms = $1;
 			$isroom = 1;
 			next;
 		}
-		if (/^Classes\t(\d+)$/) {
+		if (/^Classes\t(.*)$/) {
 			$numclasses = $1;
 			$isroom = 0;
 		}
-		if (/^Teachers\t(\d+)$/) {
+		if (/^Teachers\t(.*)$/) {
 			$numteachers = $1;
 			$isclass = 1;
 			next;
 		}
+		print "TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT $isroom"; 
 		if ($isroom) {
 			my ($roomnum, $size) = split(/\t/);
+			print $roomnum
 			$roomSize{$roomnum} = $size;
 		}
 		if ($isclass) {
