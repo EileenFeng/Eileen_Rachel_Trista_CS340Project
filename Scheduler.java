@@ -32,7 +32,6 @@ public class Scheduler {
 		Map<String, Integer> allRoomsCap = constraints.getRoomCaps();
 		int numClasses = readInput(allRoomsCap, inputFilePath, classes, rooms, buildings, dayTime, sp, classesRead);
 		sp.writePref();
-		//sp.readPref("student_prefs.txt");
 		sp.invertPrefs();
 
 		BufferedWriter writer = null;
